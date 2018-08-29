@@ -1,0 +1,24 @@
+/*
+*@param {string ---- h-v} $direnction
+*
+*eg.@include set-center();
+*eg.@include set-center(h)
+*eg.@include set-center(v)
+*/
+
+@mixin set-center($direnction:all) {
+  position: absolute;
+  @if ($direnction == all) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else {
+    @if ($direnction == h) {
+      left: 50%;
+      transform: translate(-50%, 0);
+    } @else if ($direnction == v) {
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+  }
+}

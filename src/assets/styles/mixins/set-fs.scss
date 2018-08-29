@@ -1,0 +1,12 @@
+@mixin set-fs() {
+  @for $i from 20 through 48 {
+    @if ($i%2 == 0) {
+      .fs-#{$i} {
+        font-size: unquote(($i / 100)+'rem');
+        &.bold {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

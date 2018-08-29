@@ -1,0 +1,40 @@
+/* 弹性盒子页面布局 */
+%g-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  %g-scroll {
+    flex: 1;
+    overflow: scroll;
+  }
+}
+
+/* 弹性局部排列 */
+%u-flex-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  %u-flex-item {
+    flex: 1;
+    overflow: scroll;
+  }
+}
+
+/* 登录注册等页面能用form */
+%m-auth-form {
+  @include border-1px($bd-dark-color, all, solid, .1rem);
+  margin: .8rem .3rem;
+  .m-form-item {
+    @include border-1px($bd-dark-color, bottom);
+    @include clear-border(last);
+    padding: .1rem 0;
+    .m-input-label {
+      width: 1.3rem;
+    }
+    .m-item-notice {
+      padding: 0 .2rem .1rem .82rem;
+      font-size: .26rem;
+      color: $theme-color;
+    }
+  }
+}

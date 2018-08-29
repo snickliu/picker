@@ -1,0 +1,83 @@
+@charset "utf-8";
+@import './var.scss';
+@import './reset.scss';
+@import './transition.scss';
+@import './mixin.scss';
+@import './common.scss';
+// 字体图标暂时先用阿里的在线图标
+@import "./numberFonts.scss";
+
+#app, body, html {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  color: $font-color;
+  font-size: .24rem;
+  background-color: $bg-color;
+
+  @include set-fs()
+}
+
+/* 所有page高度为全屏高度 */
+div[class^='p-'] {
+  height: 100%;
+  &.white-bg {
+    background-color: $white-color;
+  }
+}
+
+/* 重置router-link的a链接颜色 */
+a {
+  color: $font-color;
+}
+
+/* iconfont先统一设置颜色 */
+i.iconfont {
+  color: $text-icon-color;
+}
+
+/* 特殊颜色的文字和字体图标 */
+i, em {
+  &.theme-color {
+    color: $theme-color;
+  }
+  &.green-color {
+    color: $green-color;
+  }
+  &.link-color {
+    color: $link-color;
+  }
+  &.orange-color {
+    color: $orange-color;
+  }
+  &.blue-color {
+    color: $blue-color;
+  }
+}
+
+/* Digital Ball color */
+.ball {
+  display: inline-block;
+  border-radius: 50%;
+  margin: 0 .04rem;
+  width: .5rem;
+  height: .5rem;
+  text-align: center;
+  line-height: .5rem;
+  font-size: .3rem;
+  color: $white-color;
+  &-red {
+    background-color: $ball-red-color;
+  }
+  &-green {
+    background-color: $ball-green-color;
+  }
+  &-blue {
+    background-color: $ball-blue-color;
+  }
+  &-gray {
+    background-color: $ball-gray-color;
+  }
+}

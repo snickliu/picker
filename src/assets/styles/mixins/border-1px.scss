@@ -1,0 +1,171 @@
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+@function border-count($borderSide) {
+  $index: 0;
+  @each $item in $borderSide {
+    $index: $index + 1;
+  }
+  @if ($borderSide == all) {
+    $index: 4;
+  }
+  @return $index
+}
+
+@mixin setWH($borderSide, $dpr) {
+  $curDpr: unquote((100*$dpr)+'%');
+  @if (border-count($borderSide) > 1) {
+    width: $curDpr;
+    height: $curDpr;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  } @else {
+    @each $sild in $borderSide {
+      @if ($sild == left) {
+        height: $curDpr;
+        top: 0;
+        left: 0;
+        bottom: 0;
+      } @else if ($sild == right) {
+        height: $curDpr;
+        top: 0;
+        right: 0;
+        bottom: 0;
+      } @else if ($sild == top) {
+        width: $curDpr;
+        left: 0;
+        top: 0;
+        right: 0;
+      } @else if ($sild == bottom) {
+        width: $curDpr;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+    }
+  }
+}
+
+@mixin setScale($dpr) {
+  -webkit-transform: translateZ(0) scale(1/$dpr);
+  transform: translateZ(0) scale(1/$dpr);
+}
+
+@mixin setBorderRadio($borderRadius, $dpr) {
+  @if $borderRadius !=0 {
+    $radiusStrings: '';
+    @each $radiusString in $borderRadius {
+      @if (unit($radiusString)!="%") {
+        $radiusStrings: $radiusStrings+(strip-units($radiusString)*$dpr)+unit($radiusString)+' ';
+      } @else {
+        $radiusStrings: $radiusStrings+$radiusString+' ';
+      }
+    }
+    border-radius: unquote($radiusStrings);
+    overflow: inherit;
+  }
+}
+
+/*
+*@param {color} $borderColor
+*@param {string} $borderStyle
+*@param {list ----top-right-bottom-right} $borderDirection
+*@param {list ----top-right-bottom-right} $borderRadius
+*
+*eg.@include border-1px(#ccc, all, solid, 10rem);
+*eg.@include border-1px(#ccc, top left right, solid, 10rem);
+*eg.@include border-1px(#ccc, top left right, solid, 10rem 20rem);
+*eg.@include border-1px(#ccc, top left right, solid, 10rem 20rem 30rem,5rem);
+*/
+
+@mixin border-1px($borderColor:#000, $borderSide:all, $borderStyle:solid, $borderRadius:0) {
+  position: relative;
+  @if (border-count($borderSide) > 1) {
+    > * {
+      position: inherit;
+      z-index: 1;
+    }
+  }
+  &::after {
+    position: absolute;
+    content: '';
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    point-events: none;
+    box-sizing: border-box;
+    z-index: 0;
+    @if $borderSide==all {
+      border: 1px $borderStyle $borderColor;
+    } @else {
+      @each $sild in $borderSide {
+        border-#{$sild}: 1px $borderStyle $borderColor;
+      }
+    }
+    @if $borderRadius !=0 {
+      border-radius: $borderRadius;
+    } @else {
+      border-radius: 0;
+    }
+    @at-root [data-dpr='1'] & {
+      @include setWH($borderSide, 1);
+    }
+    @at-root [data-dpr='1.5'] & {
+      @include setWH($borderSide, 1.5);
+      @include setScale(1.5);
+      @include setBorderRadio($borderRadius, 1.5);
+
+    }
+    @at-root [data-dpr='2'] & {
+      @include setWH($borderSide, 2);
+      @include setScale(2);
+      @include setBorderRadio($borderRadius, 2);
+
+    }
+    @at-root [data-dpr='3'] & {
+      @include setWH($borderSide, 3);
+      @include setScale(3);
+      @include setBorderRadio($borderRadius, 3);
+    }
+  }
+}
+
+/*
+*@param {string ---- last-first} $position
+*@param {string ---- child-type} $class 当last-child失效时，使用last-of-type
+*
+*eg.@include clear-border();
+*eg.@include clear-border(last)
+*eg.@include clear-border(first)
+*eg.@include clear-border(2)
+*eg.@include clear-border(2n) => 偶数位n从0开始计算
+*eg.@include clear-border(2n+1) => 奇数位
+*/
+@mixin clear-border($pos: last, $class: child) {
+  $className: '';
+  @if ($class == child) {
+    @if ($pos == first) {
+      $className: first-child;
+    } @else if ($pos == last) {
+      $className: last-child;
+    } @else {
+      $className: unquote('nth-child(' + $pos + ')');
+    }
+  } @else {
+    @if ($pos == first) {
+      $className: first-of-type;
+    } @else if ($pos == last) {
+      $className: last-of-type;
+    } @else {
+      $className: unquote('nth-of-type(' + $pos + ')');
+    }
+  }
+
+  &:#{$className} {
+    &::after {
+      content: none;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+/*
+*@param {number} $line
+*
+*eg.@include line-overflow()
+*eg.@include line-overflow(3)
+*/
+
+@mixin line-overflow($line:1) {
+  @if ($line == 1) {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $line;
+  }
+  overflow: hidden;
+}

@@ -1,0 +1,114 @@
+/* 过渡动画用css */
+
+// 上移
+.move-up {
+  &-enter-active, &-leave-active {
+    transition: all .05s;
+  }
+
+  &-enter, &-leave-to {
+    height: 0;
+  }
+}
+
+// 从左往右移
+.left-to-right {
+  &-enter-active, &-leave-active {
+    transition: all .1s;
+  }
+
+  &-enter, &-leave-to {
+    transform: translate(-100%, 0);
+  }
+}
+
+// 从右往左移
+.right-to-left {
+  &-enter-active, &-leave-active {
+    transition: all .1s;
+  }
+
+  &-enter, &-leave-to {
+    transform: translate(100%, 0);
+  }
+}
+
+// transition组件专属从下往上渐入动画
+.slide-fade-enter-active {
+  transition: all .5s;
+}
+.slide-fade-leave-active {
+  transition: all .8s;
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateY(100%);
+}
+
+// popup专用
+.popup-show {
+  &-enter, &-leave-to{
+    .mask{ opacity: 0; }
+    .content{
+      &--top{
+        opacity: 0;
+        transform: translateY(-100px);
+      }
+      &--bottom{
+        opacity: 0;
+        transform: translateY(100px);
+      }
+    }
+    .center-wrap{
+      transform: scale(0);
+    }
+  }
+
+  &-enter-active{
+    transition: all .3s ease;
+    .mask,
+    .center-wrap,
+    .content{
+      transition: all .3s ease;
+    }
+  }
+
+  &-enter-active .center-wrap{
+    animation: zoom .4s;
+    -webkit-animation: zoom .4s;
+  }
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(0)
+  }
+  50% {
+    transform: scale(1.1)
+  }
+  100% {
+    transform: scale(1)
+  }
+}
+
+.slide-bottom {
+  &-enter-active {
+    animation: slide-bottom-enter .3s both ease;
+  }
+
+  &-leave-active {
+    animation: gl-slide-bottom-leave .3s both ease;
+  }
+}
+
+@keyframes slide-bottom-enter {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+@keyframes slide-bottom-leave {
+  to {
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
