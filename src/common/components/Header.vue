@@ -70,6 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../../assets/styles/base.scss';
   .g-header {
     position: relative;
     min-height: .88rem;

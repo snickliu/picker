@@ -6,8 +6,8 @@ module.exports = {
 
   // 全局scss文件
   globalScss: [
-    './src/assets/styles/var.scss',
-    './src/assets/styles/border.scss'
+    // '../src/assets/styles/var.scss',
+    // '../src/assets/styles/border.scss'
   ],
 
   // alias 简写

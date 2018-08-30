@@ -7,5 +7,5 @@ vue常用组件（基于better-scroll的vue datePicker组件）
 npm install
 
 # 开启本地服务器localhost:8080
-npm run dev
+npm run serve
 ```

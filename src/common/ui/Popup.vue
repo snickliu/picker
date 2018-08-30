@@ -55,6 +55,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '../../assets/styles/base.scss';
   .m-popup {
     position: fixed;
     z-index: 2000;

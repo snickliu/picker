@@ -245,6 +245,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import '../../../assets/styles/base.scss';
 // .wheel-scroll {
 //   z-index: 1;
 //   position: absolute;
