@@ -1,9 +1,9 @@
 import DatePicker from './DatePicker.vue'
-import MultiPicker from './MultiPicker.vue'
-import BetterScrollPicker from './BetterScrollPicker.vue'
+import GearingPicker from './GearingPicker.vue'
+import Picker from './Picker.vue'
 
 export {
   DatePicker,
-  MultiPicker,
-  BetterScrollPicker
+  GearingPicker,
+  Picker
 }
