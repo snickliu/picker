@@ -1,5 +1,5 @@
 # picker
-vue常用组件（基于better-scroll的vue datePicker组件）
+vue常用组件（基于better-scroll的vue datePicker组件和单个以及多个联动）
 
 ## 项目运行（nodejs 6.0+）
 ``` bash
