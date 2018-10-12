@@ -71,7 +71,7 @@ export default {
     selectedIndex: {
       type: Array,
       default () {
-        return []
+        return [0]
       }
     },
     value: {
@@ -82,7 +82,7 @@ export default {
   data () {
     return {
       state: STATE_HIDE,
-      pickerData: this.data.slice(),
+      pickerData: [this.data.slice()],
       pickerSelectedIndex: this.selectedIndex,
       pickerSelectedVal: [],
       pickerSelectedText: []
@@ -225,7 +225,7 @@ export default {
     refresh () {
       this.$nextTick(() => {
         if (this.wheels) {
-          this.wheels.forEach((wheel, index) => {
+          this.wheels.forEach((wheel) => {
             wheel.refresh()
           })
         }
