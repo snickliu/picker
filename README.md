@@ -9,4 +9,4 @@ npm install
 # 开启本地服务器localhost:8080
 npm run serve
 ```
-![Image text](https://github.com/snickliu/picker/blob/master/src/assets/images/a.GIF)
+![Image text](https://github.com/snickliu/picker/blob/master/src/assets/images/picker.GIF)
